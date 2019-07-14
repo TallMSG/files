@@ -16,8 +16,8 @@ def open_dish(a):
         for line in f:
             line = line.strip()
             ingridients.append(line)
-        dishname = str(ingridients[0])
-        ing_numb = int(ingridients[1])
+        # dishname = str(ingridients[0])
+        # ing_numb = int(ingridients[1])
         ingridients.remove(ingridients[0])
         ingridients.remove(ingridients[0])
 
@@ -25,9 +25,7 @@ def open_dish(a):
         for item in ingridients:
             aaa = item.split(' | ')
             ing_list.append(aaa)
-        # print(dishname)
-        # print(ing_numb)
-        # print(ing_list)
+
 
         ing_descript = {}
         for item in ing_list:
@@ -35,7 +33,6 @@ def open_dish(a):
             ing_descript[item[0]]['ingridient_name'] = item[0]
             ing_descript[item[0]]['quantity'] = item[1]
             ing_descript[item[0]]['measure'] = item[2]
-        # print(ing_descript)
 
     return ing_descript
 
@@ -48,8 +45,7 @@ def open_all ():
     cook_book = {}
     cook_book['Омлет'] = a
     cook_book['Утка по-пекински'] = b
-    cook_book['Запечёный картофель'] = c
-    # print(cook_book)
+    cook_book['Запеченный картофель'] = c
     return cook_book
 
 
@@ -57,52 +53,92 @@ def open_all ():
 
 
 
-
-
-# person_count = int(input('Введите количество персон: '))
-
-
-
-def cook_omelet():
+def cook_omelet(person):
     uuu = open_all()
+    omelet_ing = {}
     for k, v in uuu.items():
-        omelet_ing = {}
         if k == 'Омлет':
             omelet_ing = v
 
-
-        for k, v in omelet_ing.items():
-            new_dict = omelet_ing[k]
-            # print(new_dict)
-
-
-            for k, v in new_dict.items():
-                name = new_dict['ingridient_name']
-                if k == 'ingridient_name':
-                    sss = del new_dict[k]
-                    print(sss)
-
-
-
-
-cook_omelet()
+    ing = []
+    quant = []
+    meas = []
+    for k, v in omelet_ing.items():
+        name = v['ingridient_name']
+        quantity = v['quantity']
+        measure = v['measure']
+        ing.append(name)
+        quant.append(int(quantity)*person)
+        meas.append(measure)
+    print(ing[0], quant[0], meas[0])
+    print(ing[1], quant[1], meas[1])
+    print(ing[2], quant[2], meas[2])
 
 
-# def get_shop_list_by_dishes(dishes, person_count):
+def cook_duck(person):
+    uuu = open_all()
+    duck_ing = {}
+    for k, v in uuu.items():
+        if k == 'Утка по-пекински':
+            duck_ing = v
 
-# while True:
-#     print('Введите блюда:')
-#     dishes = input('Омлет - a, Утка по-пекински - b, Запечённый картофель - c: ')
-#     if dishes == 'a':
-#         cook_omelet()
-#     elif dishes == 'b':
-#         cook_duck()
-#     elif dishes == 'c':
-#         cook_potatoes()
-#     else:
-#         print('Такого блюда не существует')
+    ing = []
+    quant = []
+    meas = []
+    for k, v in duck_ing.items():
+        name = v['ingridient_name']
+        quantity = v['quantity']
+        measure = v['measure']
+        ing.append(name)
+        quant.append(int(quantity)*person)
+        meas.append(measure)
+    print(ing[0], quant[0], meas[0])
+    print(ing[1], quant[1], meas[1])
+    print(ing[2], quant[2], meas[2])
+    print(ing[3], quant[3], meas[3])
 
 
+def cook_potatoes(person):
+    uuu = open_all()
+    potatoes_ing = {}
+    for k, v in uuu.items():
+        if k == 'Запеченный картофель':
+            potatoes_ing = v
+
+    ing = []
+    quant = []
+    meas = []
+    for k, v in potatoes_ing.items():
+        name = v['ingridient_name']
+        quantity = v['quantity']
+        measure = v['measure']
+        ing.append(name)
+        quant.append(int(quantity)*person)
+        meas.append(measure)
+    print(ing[0], quant[0], meas[0])
+    print(ing[1], quant[1], meas[1])
+    print(ing[2], quant[2], meas[2])
+
+
+def get_shop_list_by_dishes():
+
+    dishes = input('Введите блюда (Омлет - a, Утка по-пекински - b, Запечённый картофель - c): ')
+    person_count = int(input('Введите количество персон: '))
+    print('')
+
+    while True:
+        print('Потребуется:')
+        if 'a' in dishes:
+            cook_omelet(person_count)
+        if 'b' in dishes:
+            cook_duck(person_count)
+        if 'c' in dishes:
+            cook_potatoes(person_count)
+        else:
+            return
+        break
+
+get_shop_list_by_dishes()
 
 
 
